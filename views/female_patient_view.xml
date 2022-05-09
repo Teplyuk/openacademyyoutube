@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_youtube_female_patient" model="ir.actions.act_window">
+        <field name="name">Female Patient (>5 years)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">youtube.patient</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_gender':'female'}</field>
+        <field name="domain">[('gender', '=', 'female'), ('age', '&gt;=', 5)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your female patient!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="youtube_menu_female_patient"
+              name="Female Patient"
+              action="action_youtube_female_patient"
+              parent="youtube_menu_patient"
+              sequence="20"/>
+
+</odoo>

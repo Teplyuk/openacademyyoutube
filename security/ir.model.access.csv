@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.youtube.patient,access_youtube_patient,openacademy_youtube.model_youtube_patient,base.group_user,1,1,1,1
+access.youtube.appointment,access_youtube_appointment,openacademy_youtube.model_youtube_appointment,base.group_user,1,1,1,1

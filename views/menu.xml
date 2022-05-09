@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="youtube_menu"
+              name="Youtube"
+              web_icon="openacademy_youtube,static/description/icon.png"
+              sequence="0"/>
+    <!--      action="hr_config_settings_action"
+              action="sale.product_template_action"-->
+    <!--      groups="base.group_system"/>-->
+
+    <menuitem id="youtube_menu_patient"
+              name="Patient menu"
+              parent="youtube_menu"
+              sequence="0"/>
+
+    <menuitem id="youtube_menu_appointment_menu"
+              name="Appointment menu"
+              parent="youtube_menu"
+              sequence="0"/>
+
+</odoo>

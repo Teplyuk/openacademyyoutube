@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_youtube_patient_tree" model="ir.ui.view">
+        <field name="name">youtube.patient.tree</field>
+        <field name="model">youtube.patient</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id"/>
+                <field name="name" string="Youtube Name"/>
+                <field name="ref"/>
+                <field name="age"/>
+                <field name="gender"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_youtube_patient_form" model="ir.ui.view">
+        <field name="name">youtube.patient.form</field>
+        <field name="model">youtube.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" nolabel="0"/>
+                            <field name="date_of_birth"/>
+                            <field name="age"/>
+                        </group>
+                        <group>
+                            <field name="gender"/>
+                            <field name="ref" string="Комментарий"/>
+                            <field name="active" invisible="1"/>
+                            <field name="active2"/>
+                            <field name="appointment_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_youtube_patient_search" model="ir.ui.view">
+        <field name="name">youtube.patient.search</field>
+        <field name="model">youtube.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Youtube Name" filter_domain="['|', ('name', 'ilike', self), ('ref', 'ilike', self)]"/>
+                <field name="ref"/>
+                <field name="gender"/>
+                <field name="age"/>
+                <filter name="filter_male" string="Male" domain="[('gender', '=', 'male')]"/>
+                <filter name="filter_female" string="Female" domain="[('gender', '!=', 'male')]"/>
+                <separator/>
+                <filter name="filter_alone_female" string="A-Female" domain="[('gender', '!=', 'male')]"/>
+<!--                <filter name="filter_kids" string="Kids" domain="[('age', '&lt;=', 5)]"/>-->
+                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Gender" name="group_by_gender" context="{'group_by':'gender'}"/>
+                </group>
+                <searchpanel>
+                    <field name="gender" string="Gender" select='multi' enable_counters="1" icon="fa-users"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_youtube_patient" model="ir.actions.act_window">
+        <field name="name">Patient</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">youtube.patient</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_gender':'male', 'search_default_filter_male': 1, 'search_default_group_by_gender': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your patient!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="youtube_menu_male_patient"
+              name="Patient"
+              action="action_youtube_patient"
+              parent="youtube_menu_patient"
+              sequence="0"/>
+
+</odoo>
