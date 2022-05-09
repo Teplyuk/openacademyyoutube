@@ -14,7 +14,7 @@
     'license': 'LGPL-3',
     'sequence': -100,
 
-    # any module necessary for this one to work correctly dm
+    # any module necessary for this one to work correctly
     'depends': ['base', 'mail'],
 
     # always loaded
