@@ -3,7 +3,7 @@
     'name': "OpenAcademyYoutube",
     'summary': """Teplyuk youtube-trainings""",
     'description': """training courses""",
-    'author': "Teplyuk",
+    'author': "Teplyuk/DM",
     'website': "",
     'category': 'Administration',
     'version': '1.0.1',
