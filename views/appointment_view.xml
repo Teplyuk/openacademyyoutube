@@ -73,6 +73,7 @@
                         </group>
                         <group>
                             <field name="appointment_time" default_focus='1'/>
+                            <field name="hide_sales_prices" groups="base.group_no_one"/>
                         </group>
                     </group>
                     <notebook>
@@ -82,10 +83,25 @@
                                        options="{'collaborative': true, 'resizable': true}"/>
                             </group>
                         </page>
-                         <page string='Pharmacy' name='pharmacy'>
+                        <page string='Pharmacy' name='pharmacy'>
                             <group>
-                                <field name="booking_date"/>
+                                <field name="booking_date" string="Дата поставки"/>
                             </group>
+                            <field name="pharmacy_lines_ids">
+                                <tree editable="bottom">     <!-- три варианта: через форму (без editable), без формы сверху (top), без формы снизу (bottom)-->
+                                    <field name="product_id"/>
+                                    <field name="price_unit"
+                                            attrs="{'column_invisible': [('parent.hide_sales_prices', '=', True)]}"/>
+                                    <field name="qty"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="product_id"/>
+                                        <field name="price_unit"/>
+                                        <field name="qty"/>
+                                    </group>
+                                </form>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>

@@ -29,6 +29,8 @@ class YoutubeAppointment(models.Model):
         [('draft', 'Draft'), ('in_consultation', 'In Consultation'), ('done', 'Done'), ('cancel', 'Cancel'), ('gray', 'Gray')],
         string='Status', tracking=True, default='draft', required=True)
     doctor_id = fields.Many2one('res.users', string='Doctor')
+    pharmacy_lines_ids = fields.One2many('youtube.appointment.lines', 'appointment_id', string='Pharmacy Lines')
+    hide_sales_prices = fields.Boolean(string='Hide sales prices')
 
     @api.onchange('patient_id')
     def onchange_patient_id(self):
@@ -51,3 +53,26 @@ class YoutubeAppointment(models.Model):
         # for rec in self:
         #     rec.state = 'cancel'
         # dict(self._fields['type'].selection).get(self.type)
+
+
+class AppointmentLines(models.Model):
+    _name = "youtube.appointment.lines"
+    _description = "Appointment Pharmacy Lines"
+
+    product_id = fields.Many2one('product.product', required=True)
+    price_unit = fields.Float(related='product_id.list_price')
+    qty = fields.Integer(string='Quantity', default=1)
+    appointment_id = fields.Many2one('youtube.appointment', string='Appointment')
+
+
+
+
+
+
+
+
+
+
+
+
+
