@@ -16,6 +16,8 @@ class YoutubePatient(models.Model):
     active = fields.Boolean(string='Active', default=True, tracking=True)
     active2 = fields.Boolean(string='Active2', default=True, tracking=True)
     appointment_id = fields.Many2one(string='Appointment', comodel_name='youtube.appointment')
+    image = fields.Image(string="Image")
+    tag_ids = fields.Many2many('youtube.patient.tag', string='Tags')
 
     @api.depends('date_of_birth')
     def _compute_age(self):
