@@ -19,4 +19,10 @@
               parent="youtube_menu"
               sequence="0"/>
 
+    <menuitem id="youtube_menu_cancellation"
+              name="Cancellation"
+              parent="youtube_menu_appointment_menu"
+              action="action_cancel_appointment"
+              sequence="20"/>
+
 </odoo>

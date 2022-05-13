@@ -3,3 +3,4 @@ access.youtube.patient,access_youtube_patient,openacademy_youtube.model_youtube_
 access.youtube.patient.tag,access_youtube_patient_tag,openacademy_youtube.model_youtube_patient_tag,base.group_user,1,1,1,1
 access.youtube.appointment,access_youtube_appointment,openacademy_youtube.model_youtube_appointment,base.group_user,1,1,1,1
 access.youtube.appointment.lines,access_youtube_appointment_lines,openacademy_youtube.model_youtube_appointment_lines,base.group_user,1,1,1,1
+access.cancel.appointment.wizard,access_cancel_appointment_wizard,openacademy_youtube.model_youtube_cancel_appointment_wizard,base.group_user,1,1,1,1

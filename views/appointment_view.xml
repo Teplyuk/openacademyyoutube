@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record id="view_youtube_appointment_activity" model="ir.ui.view">
+        <field name="name">youtube.appointment.activity</field>
+        <field name="model">youtube.appointment</field>
+        <field name="arch" type="xml">
+            <activity string="Appointment">
+                <field name="patient_id"/>
+                <field name="ref"/>
+                <templates>
+                    <div t-name="activity-box">
+                        <img t-att-src="activity_image('youtube.patient', 'image', record.patient_id.raw_value)" role="img" t-att-title="record.patient_id.value" t-att-alt="record.patient_id.value"/>
+                        <div>
+                            <field name="ref" display="full"/>
+                        </div>
+                    </div>
+                </templates>
+            </activity>
+        </field>
+    </record>
+
     <record id="view_youtube_appointment_tree" model="ir.ui.view">
         <field name="name">youtube.appointment.tree</field>
         <field name="model">youtube.appointment</field>
@@ -80,7 +99,7 @@
                         <page string='Prescription' name='prescription'>
                             <group>
                                 <field name="prescription" placeholder="Вы прекрасны!"
-                                       options="{'collaborative': true, 'resizable': true}"/>
+                                       options="{'collaborative': true, 'resizable': true, 'codeview': true}"/>
                             </group>
                         </page>
                         <page string='Pharmacy' name='pharmacy'>
@@ -128,7 +147,7 @@
         <field name="name">Appointment</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">youtube.appointment</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,activity</field>
         <field name="context">{}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
