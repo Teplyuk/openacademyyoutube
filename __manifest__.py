@@ -20,6 +20,8 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/patient_data_tag.xml',
+        'data/youtube.patient.tag.csv',
         'wizard/cancel_appointment_view.xml',
         'views/menu.xml',
         'views/patient_view.xml',

@@ -53,6 +53,8 @@
         <field name="arch" type="xml">
             <form create='0' edit='1' delete='1'>
                 <header>
+                    <!--<button name="%(openacademy_youtube.action_cancel_appointment)d" string="Cancel status" type='action' class='oe_highlight'-->
+                    <!--states="gray,draft,in_consultation,done" data-hotkey="c"/>-->
                     <button name="cancel_status_button" string="Cancel status" type='object' class='oe_highlight'
                             states="gray,draft,in_consultation,done" data-hotkey="c"/>
                     <field name="state" widget="statusbar" nolabel='1' options="{'clickable': '1'}"

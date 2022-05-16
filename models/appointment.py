@@ -49,7 +49,11 @@ class YoutubeAppointment(models.Model):
         }
 
     def cancel_status_button(self):
-        self.state = 'cancel'
+        action = self.env.ref('openacademy_youtube.action_cancel_appointment').read()[0]
+        return action
+        # -2-
+        # self.state = 'cancel'
+        # -1-
         # for rec in self:
         #     rec.state = 'cancel'
         # dict(self._fields['type'].selection).get(self.type)

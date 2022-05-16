@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="patient_tag_kid" model="youtube.patient.tag">
+            <field name="name">Kid</field>
+        </record>
+        <record id="patient_tag_adult" model="youtube.patient.tag">
+            <field name="name">Adult</field>
+        </record>
+         <record id="55" model="youtube.patient.tag">
+            <field name="name">Erase</field>
+            <field name="active" eval="False"/>
+        </record>
+    </data>
+</odoo>
