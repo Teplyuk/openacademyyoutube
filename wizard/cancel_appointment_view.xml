@@ -7,10 +7,13 @@
         <field name="arch" type="xml">
             <form>
                 <group>
-                    <field name="appointment_id"/>
-                    <field name="reason"/>
-                </group>
-                <group>
+                    <group>
+                        <field name="appointment_id"/>
+                        <field name="reason"/>
+                    </group>
+                    <group>
+                        <field name="date_cancel"/>
+                    </group>
                 </group>
                 <footer>
                     <button name="action_cancel" string="Cancel" type="object" class="btn-primary" data-hotkey="q"/>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_youtube_playground_form" model="ir.ui.view">
+        <field name="name">youtube.playground.form</field>
+        <field name="model">youtube.playground</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="model_id"/>
+                    <field name="code" widget="ace" options="{'mode': 'python'}"/>
+                </group>
+                <group>
+                     <button name="action_execute" string="Execute" type='object' class='btn_primary'
+                            data-hotkey="q"/>
+                </group>
+                <group>
+                    <field name="result"/>
+                </group>
+                <footer>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_youtube_playground" model="ir.actions.act_window">
+        <field name="name">Playground</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">youtube.playground</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+    </record>
+
+    <menuitem id="youtube_menu_technical" name="Youtube Technical" web_icon="openacademy_youtube,static/description/icon.png" sequence="1">
+        <menuitem id="youtube_menu_playground1" name="Play Ground 1" parent="youtube_menu_technical" sequence="10">
+            <menuitem id="youtube_menu_playground2" name="Play Ground 2" parent="youtube_menu_playground1" sequence="10"/>
+        </menuitem>
+    </menuitem>
+
+</odoo>

@@ -19,6 +19,22 @@ class YoutubePatient(models.Model):
     image = fields.Image(string="Image")
     tag_ids = fields.Many2many('youtube.patient.tag', string='Tags')
 
+    @api.model
+    def create(self, vals_list):
+        # print("Hello world, i`m cr8", vals_list)
+        my_next_sequence = self.env['ir.sequence'].next_by_code('youtube.patient')
+        if vals_list['ref']:
+            vals_list['ref'] = vals_list['ref'] + ' // ' + my_next_sequence
+        else:
+            vals_list['ref'] = my_next_sequence
+        return super(YoutubePatient, self).create(vals_list)
+
+    def write(self, vals):
+        if not self.ref and not vals.get('ref'):
+            my_next_sequence = self.env['ir.sequence'].next_by_code('youtube.patient')
+            vals['ref'] = my_next_sequence
+        return super(YoutubePatient, self).write(vals)
+
     @api.depends('date_of_birth')
     def _compute_age(self):
         today = date.today()
@@ -29,3 +45,6 @@ class YoutubePatient(models.Model):
                 ref.age = today.year - ref.date_of_birth.year
             else:
                 ref.age = 0
+
+    def name_get(self):
+        return [(record.id, "[%s] %s" % (record.id, record.name)) for record in self]
