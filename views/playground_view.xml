@@ -31,9 +31,12 @@
         <field name="target">inline</field>
     </record>
 
+<!--    <menuitem id="youtube_menu_technical" name="Youtube Technical" web_icon="openacademy_youtube,static/description/icon.png" sequence="1"/>-->
+<!--    <menuitem id="youtube_menu_playground" name="Play Ground" parent="youtube_menu_technical" action="action_youtube_playground" sequence="10"/>-->
+
     <menuitem id="youtube_menu_technical" name="Youtube Technical" web_icon="openacademy_youtube,static/description/icon.png" sequence="1">
-        <menuitem id="youtube_menu_playground1" name="Play Ground 1" parent="youtube_menu_technical" sequence="10">
-            <menuitem id="youtube_menu_playground2" name="Play Ground 2" parent="youtube_menu_playground1" sequence="10"/>
+        <menuitem id="youtube_menu_playground1" name="Play Ground 1" sequence="10">
+            <menuitem id="youtube_menu_playground2" name="Play Ground 2" action="action_youtube_playground" sequence="10"/>
         </menuitem>
     </menuitem>
 
