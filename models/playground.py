@@ -15,7 +15,9 @@ class YoutubePlayGround(models.Model):
     #  - self.env.is_superuser: Return whether the environment is in superuser mode.
     #  - self.env.company: Return the current company (as an instance)
     #  - self.env.companies: Return a recordset of the enabled companies by the user
-    #  - self.env.lang: Return the current language code \n\n\n\n"""
+    #  - self.env.lang: Return the current language code
+    #  - self.env.ref('base.res_partner_12').name: base.res_partner_12 - эту строку можем получить зайдя в объект - "Жучок" - View Metadata
+    #  - self.env['youtube.patient'].browse(2).name: вот это - полезная информация! \n\n\n\n"""
 
     model_id = fields.Many2one('ir.model', string='Model')
     code = fields.Text(string='Code', default=DEFAULT_ENV_VARIABLES)
