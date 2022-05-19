@@ -5,7 +5,7 @@
         <field name="name">youtube.patient.tree</field>
         <field name="model">youtube.patient</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree export_xlsx="0">
                 <field name="id"/>
                 <field name="name" string="Youtube Name"/>
                 <field name="ref"/>
@@ -29,6 +29,7 @@
                             <field name="name" nolabel="0"/>
                             <field name="date_of_birth"/>
                             <field name="age"/>
+                            <field name="appointment_count"/>
                         </group>
                         <group>
                             <field name="gender" invisible="context.get('hide_gender')"/>
@@ -38,6 +39,11 @@
                             <field name="active2"/>
                             <field name="appointment_id"/>
                         </group>
+                    </group>
+                    <group string="Other information" name="other_info">
+                        <field name="parent" attrs="{'invisible': ['|', ('age', '>', 18), ('gender', '=', 'male')]}"/>
+                        <field name="marital_status" attrs="{'invisible': [('age', '&lt;=', 18)]}"/>
+                        <field name="partner_name" attrs="{'read_only': [('marital_status', '=', 'married')]}"/>
                     </group>
                 </sheet>
                 <!-- Chatter -->

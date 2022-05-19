@@ -18,6 +18,17 @@ class YoutubePatient(models.Model):
     appointment_id = fields.Many2one(string='Appointment', comodel_name='youtube.appointment')
     image = fields.Image(string="Image")
     tag_ids = fields.Many2many('youtube.patient.tag', string='Tags')
+    appointment_count = fields.Integer(string='Appointment Count', compute='_compute_appointment_count')
+    appointment_ids = fields.One2many('youtube.appointment', 'patient_id', string="Appointments")
+    parent = fields.Char(string="Parent")
+    marital_status = fields.Selection([('married', 'Married'), ('single', 'Single')], string='Marital status',
+                                      tracking=True)
+    partner_name = fields.Char(string='Partner Name')
+
+    @api.depends('appointment_ids')
+    def _compute_appointment_count(self):
+        for rec in self:
+            rec.appointment_count = self.env['youtube.appointment'].search_count([('patient_id', '=', rec.id)])
 
     @api.model
     def create(self, vals_list):

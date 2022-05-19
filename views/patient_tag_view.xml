@@ -7,6 +7,7 @@
             <tree>
                 <field name="id"/>
                 <field name="name"/>
+                <field name="sequence"/>
                 <field name="color" widget='color_picker'/>
                 <field name="color_hex" widget='color'/>
                 <field name="active"/>
@@ -23,6 +24,7 @@
                    <group>
                         <group>
                             <field name="name"/>
+                            <field name="sequence"/>
                         </group>
                         <group>
                             <field name="color" widget='color_picker'/>

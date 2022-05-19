@@ -1,5 +1,6 @@
 
 from odoo import api, fields, models, _, tools
+from odoo.exceptions import ValidationError
 
 # REFERENCE
 # - 1 -
@@ -8,7 +9,14 @@ from odoo import api, fields, models, _, tools
 # OR
 # patient_id = fields.Many2one('youtube.patient', string='Patient')
 
+# - 2 -
+# ondelete=
+# patient_id = fields.Many2one(string='Patient', comodel_name='youtube.patient', ondelete='restrict')
+# ondelete='restrict' - запрещет удалять, если есть связь
+# ondelete='cascade' - удаляет элемент и все подчиненные
+
 ####################################################################################
+
 
 class YoutubeAppointment(models.Model):
     _name = "youtube.appointment"
@@ -16,7 +24,7 @@ class YoutubeAppointment(models.Model):
     _description = "Youtube Appointment"
     _rec_name = 'patient_id'
 
-    patient_id = fields.Many2one(string='Patient', comodel_name='youtube.patient')
+    patient_id = fields.Many2one(string='Patient', comodel_name='youtube.patient', ondelete='restrict')
     gender = fields.Selection(related='patient_id.gender', help='Sex')              #readonly=False
     appointment_time = fields.Datetime(string='Appointment Time', default=fields.Datetime.now)
     booking_date = fields.Date(string='Booking Date', default=fields.Date.context_today)
@@ -31,6 +39,16 @@ class YoutubeAppointment(models.Model):
     doctor_id = fields.Many2one('res.users', string='Doctor')
     pharmacy_lines_ids = fields.One2many('youtube.appointment.lines', 'appointment_id', string='Pharmacy Lines')
     hide_sales_prices = fields.Boolean(string='Hide sales prices')
+
+    def unlink(self):
+        if self.state != 'draft':
+            raise ValidationError(_("You can delete appointment only with 'Draft' status!"))
+        return super(YoutubeAppointment, self).unlink()
+
+    # @api.model
+    # def create(self, vals_list):            не работает, потому что у нас нет поля 'name' Индус не показывал как создал!
+    #     vals_list['name'] = self.env['ir.sequence'].next_by_code('youtube.appointment')
+    #     return super(YoutubeAppointment, self).create(vals_list)
 
     @api.onchange('patient_id')
     def onchange_patient_id(self):
