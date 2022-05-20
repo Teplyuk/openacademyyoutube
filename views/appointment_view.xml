@@ -29,12 +29,16 @@
                   decoration-warning="state == 'cancel'"
                   decoration-muted="state == 'gray'"
                   decoration-info="state == 'draft'" sample="1" multi_edit="1">
+                <header>
+                    <button name="action_tree_in_consultation" string="In Consultation" type="object"/>
+                </header>
                 <field name="id"/>
                 <field name="priority" widget="priority" optional="show"/>
                 <field name="patient_id" optional="show"/>
                 <field name="activity_ids" widget="list_activity" optional="show"/>
                 <field name="appointment_time" optional="show"/>
-                <field name="doctor_id" optional="show" widget="many2one_avatar"/>   <!--_user добавление этого тега, делает аватарку ссылкой на чат с пользователем-->
+                <field name="doctor_id" optional="show"
+                       widget="many2one_avatar"/>   <!--_user добавление этого тега, делает аватарку ссылкой на чат с пользователем-->
                 <field name="doctor_id" string='Doctor_USER' optional="show" widget="many2one_avatar_user"/>
                 <field name="booking_date" optional="hide"/>
                 <field name="state" widget="badge"
@@ -43,6 +47,13 @@
                        decoration-warning="state == 'cancel'"
                        decoration-muted="state == 'gray'"
                        decoration-info="state == 'draft'" optional="show"/>
+                <button name="action_tree_done" type="object"
+                        attrs="{'invisible': [('state', '!=', 'in_consultation')]}"
+                        class="fa fa-check btn-success"/>
+                <button name="%(openacademy_youtube.action_cancel_appointment)d" type="action"
+                        attrs="{'invisible': [('state', 'not in', ('in_consultation', 'draft'))]}"
+                        context="{'default_reason': 'test', 'hide_appointment': 1}"
+                        class="fa fa-times btn-danger"/>
             </tree>
         </field>
     </record>

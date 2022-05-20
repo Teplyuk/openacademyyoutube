@@ -1,5 +1,6 @@
 from datetime import date
 from odoo import api, fields, models, _, tools
+from odoo.exceptions import ValidationError
 
 
 class YoutubePatient(models.Model):
@@ -29,6 +30,12 @@ class YoutubePatient(models.Model):
     def _compute_appointment_count(self):
         for rec in self:
             rec.appointment_count = self.env['youtube.appointment'].search_count([('patient_id', '=', rec.id)])
+
+    @api.ondelete(at_uninstall=False)
+    def _check_appointments(self):
+        for rec in self:
+            if rec.appointment_ids:
+                raise ValidationError(_("You cannot delete a patient with appointments!"))
 
     @api.model
     def create(self, vals_list):

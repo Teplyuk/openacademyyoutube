@@ -76,6 +76,15 @@ class YoutubeAppointment(models.Model):
         #     rec.state = 'cancel'
         # dict(self._fields['type'].selection).get(self.type)
 
+    def action_tree_in_consultation(self):
+        for rec in self:
+            if rec.state == 'draft':
+                rec.state = 'in_consultation'
+
+    def action_tree_done(self):
+        for rec in self:
+            rec.state = 'done'
+
 
 class AppointmentLines(models.Model):
     _name = "youtube.appointment.lines"

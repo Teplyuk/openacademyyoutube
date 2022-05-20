@@ -21,12 +21,17 @@
         <field name="model">youtube.patient</field>
         <field name="arch" type="xml">
             <form>
-                <sheet>
-                   <group>                                                    <!--  class="o_kanban_image_fill_left" // class="oe_avatar"-->
+                <sheet>                                                 <!--  class="o_kanban_image_fill_left" // class="oe_avatar"-->
+                    <field name="image" widget="image" class="oe_avatar"
+                           options="{'size': [100, 100]}"/>
+                    <div class="oe_title">
+                        <h1>
+                            <label for="name" string="Name" class="oe_edit_only"/>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
                         <group>
-                            <field name="image" widget="image"
-                                   options="{'size': [100, 100]}"/>
-                            <field name="name" nolabel="0"/>
                             <field name="date_of_birth"/>
                             <field name="age"/>
                             <field name="appointment_count"/>
@@ -43,7 +48,8 @@
                     <group string="Other information" name="other_info">
                         <field name="parent" attrs="{'invisible': ['|', ('age', '>', 18), ('gender', '=', 'male')]}"/>
                         <field name="marital_status" attrs="{'invisible': [('age', '&lt;=', 18)]}"/>
-                        <field name="partner_name" attrs="{'read_only': [('marital_status', '=', 'married')]}"/>
+                        <field name="partner_name" attrs="{'read_only': [('marital_status', '=', 'married')],
+                                                                'required': [('marital_status', '=', 'married')]}"/>
                     </group>
                 </sheet>
                 <!-- Chatter -->
