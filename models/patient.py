@@ -1,4 +1,5 @@
 from datetime import date
+from dateutil import relativedelta
 from odoo import api, fields, models, _, tools
 from odoo.exceptions import ValidationError
 
@@ -11,7 +12,7 @@ class YoutubePatient(models.Model):
 
     name = fields.Char(string='Name', tracking=True)
     date_of_birth = fields.Date(string='Date of Birth')
-    age = fields.Integer(string='Age', compute='_compute_age', tracking=True)
+    age = fields.Integer(string='Age', compute='_compute_age', inverse='_inverse_compute_age', search='_search_age', tracking=True)
     ref = fields.Char(string='Reference', tracking=True)
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string='Gender', tracking=True)
     active = fields.Boolean(string='Active', default=True, tracking=True)
@@ -56,13 +57,32 @@ class YoutubePatient(models.Model):
     @api.depends('date_of_birth')
     def _compute_age(self):
         today = date.today()
-        for ref in self:
+        for rec in self:
             # print("today", today)
             # print("date_of_birth.year", ref.date_of_birth)
-            if ref.date_of_birth:
-                ref.age = today.year - ref.date_of_birth.year
+            if rec.date_of_birth:
+                rec.age = today.year - rec.date_of_birth.year
             else:
-                ref.age = 0
+                rec.age = 0
+
+    @api.depends('age')
+    def _inverse_compute_age(self):
+        today = date.today()
+        for rec in self:
+            rec.date_of_birth = today - relativedelta.relativedelta(years = rec.age)
+
+    def _search_age(self, operator, value):
+        today = date.today()
+        date_of_birth = today - relativedelta.relativedelta(years = value)
+        start_of_year = date_of_birth.replace(day=1, month=1)
+        end_of_year = date_of_birth.replace(day=31, month=12)
+        return [('date_of_birth', '>=', start_of_year),('date_of_birth', '<=', end_of_year)]
+
+    def action_tree_groupby_test(self):
+        print('Test button')
+
+    def action_done(self):
+        print('Done button test')
 
     def name_get(self):
         return [(record.id, "[%s] %s" % (record.id, record.name)) for record in self]

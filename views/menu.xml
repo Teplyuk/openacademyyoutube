@@ -19,6 +19,11 @@
               parent="youtube_menu"
               sequence="0"/>
 
+    <menuitem id="youtube_menu_configuration_menu"
+              name="Configuration"
+              parent="youtube_menu"
+              sequence="10"/>
+
     <menuitem id="youtube_menu_cancellation"
               name="Cancellation"
               parent="youtube_menu_appointment_menu"

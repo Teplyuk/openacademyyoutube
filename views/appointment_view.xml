@@ -47,13 +47,18 @@
                        decoration-warning="state == 'cancel'"
                        decoration-muted="state == 'gray'"
                        decoration-info="state == 'draft'" optional="show"/>
-                <button name="action_tree_done" type="object"
+                <button name="action_tree_done" type="object" title="Action Done"
                         attrs="{'invisible': [('state', '!=', 'in_consultation')]}"
                         class="fa fa-check btn-success"/>
-                <button name="%(openacademy_youtube.action_cancel_appointment)d" type="action"
+                <button name="%(openacademy_youtube.action_cancel_appointment)d" type="action" title="Action Cancel"
                         attrs="{'invisible': [('state', 'not in', ('in_consultation', 'draft'))]}"
                         context="{'default_reason': 'test', 'hide_appointment': 1}"
                         class="fa fa-times btn-danger"/>
+                <groupby name="patient_id">
+                    <button name="action_tree_groupby_test" string="Test Button" type="object" class="oe_highlight"/>
+                    <button name="edit" string="Edit" type="edit"/>
+                    <button name="action_done" class="fa fa-check" type="object" title="Action Done"/>
+                </groupby>
             </tree>
         </field>
     </record>

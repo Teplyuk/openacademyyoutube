@@ -53,7 +53,7 @@
     <menuitem id="youtube_menu_patient_tag"
               name="Tag"
               action="action_youtube_patient_tag"
-              parent="youtube_menu_patient"
+              parent="youtube_menu_configuration_menu"
               sequence="20"/>
 
 </odoo>
