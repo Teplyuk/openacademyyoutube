@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_youtube_operation_tree" model="ir.ui.view">
+        <field name="name">youtube.operation.tree</field>
+        <field name="model">youtube.operation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id"/>
+                <field name="doctor_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_youtube_operation_form" model="ir.ui.view">
+        <field name="name">youtube.operation.form</field>
+        <field name="model">youtube.operation</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="operation_name"/>
+                    <field name="doctor_id"/>
+                </group>
+                <group>
+                </group>
+                <footer>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_youtube_operation" model="ir.actions.act_window">
+        <field name="name">Operation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">youtube.operation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="youtube_menu_operation" name="Operation" action="action_youtube_operation" parent="youtube_menu_configuration_menu" sequence="10"/>
+
+
+</odoo>

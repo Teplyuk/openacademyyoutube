@@ -39,6 +39,7 @@ class YoutubeAppointment(models.Model):
     doctor_id = fields.Many2one('res.users', string='Doctor')
     pharmacy_lines_ids = fields.One2many('youtube.appointment.lines', 'appointment_id', string='Pharmacy Lines')
     hide_sales_prices = fields.Boolean(string='Hide sales prices')
+    operation_id = fields.Many2one(string='Operation', comodel_name='youtube.operation')
 
     def unlink(self):
         if self.state != 'draft':

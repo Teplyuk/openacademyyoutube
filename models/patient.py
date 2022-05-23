@@ -42,7 +42,7 @@ class YoutubePatient(models.Model):
     def create(self, vals_list):
         # print("Hello world, i`m cr8", vals_list)
         my_next_sequence = self.env['ir.sequence'].next_by_code('youtube.patient')
-        if vals_list['ref']:
+        if ('ref' in vals_list) and vals_list['ref']:
             vals_list['ref'] = vals_list['ref'] + ' // ' + my_next_sequence
         else:
             vals_list['ref'] = my_next_sequence
