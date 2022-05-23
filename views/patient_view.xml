@@ -44,6 +44,7 @@
                             <field name="active2"/>
                             <field name="appointment_id"/>
                         </group>
+                         <div class="o_partner_order_summary" colspan="2"/>
                     </group>
                     <group string="Other information" name="other_info">
                         <field name="parent" attrs="{'invisible': ['|', ('age', '>', 18), ('gender', '=', 'male')]}"/>

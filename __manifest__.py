@@ -10,7 +10,6 @@
     'installable': True,
     'application': True,
     'auto_install': False,
-    'assets': {},
     'license': 'LGPL-3',
     'sequence': -100,
 
@@ -32,7 +31,15 @@
         'views/appointment_view.xml',
         'views/res_config_settings_views.xml'
     ],
-
+    'assets': {
+        'web.assets_backend': [
+            'openacademy_youtube/static/src/js/wOrderSummary.js',
+            'openacademy_youtube/static/src/css/wOrderSummary.css',
+        ],
+        'web.assets_qweb': [
+            'openacademy_youtube/static/src/xml/wOrderSummary.xml',
+        ],
+    },
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',

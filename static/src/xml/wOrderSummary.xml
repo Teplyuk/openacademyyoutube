@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+     <t t-name="w1OrderSummary" owl="1">
+          <div class="center">
+             <img class="w1O" src="#" width="75px" height="75px"/>
+
+             <!-- Customer name -->
+             <p class="p-name"><strong>ЗДЕСЬ МОЖЕТ БЫТЬ ВАША РЕКЛАМА</strong></p>
+
+             <!-- Address -->
+             <p class="p-address">
+                 <i class="fa fa-map-marker"/>
+                 <span>Fairfield</span>
+             </p>
+
+             <!-- Grid of previous order stats -->
+             <div class="row">
+                 <div class="col-6">
+                     <p><strong>35</strong></p>
+                     <p class="p-text">Orders</p>
+                 </div>
+                 <div class="col-6">
+                     <p><strong>$97,183.50</strong></p>
+                     <p class="p-text">Total Sales</p>
+                 </div>
+             </div>
+         </div>
+     </t>
+</templates>
