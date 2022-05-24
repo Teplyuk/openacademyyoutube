@@ -34,7 +34,7 @@
                         <group>
                             <field name="date_of_birth"/>
                             <field name="age"/>
-                            <field name="appointment_count"/>
+                            <field name="appointment_id"/>
                         </group>
                         <group>
                             <field name="gender" invisible="context.get('hide_gender')" widget="radio"/>
@@ -42,7 +42,6 @@
                             <field name="ref" string="Ref" readonly="1" force_save="1"/>
                             <field name="active" invisible="1"/>
                             <field name="active2"/>
-                            <field name="appointment_id"/>
                         </group>
                          <div class="o_partner_order_summary" colspan="2"/>
                     </group>

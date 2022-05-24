@@ -1,6 +1,15 @@
 
  // intro_to_owl_part_1.PartnerOrderSummary     ==> w1OrderSummary
  // PartnerOrderSummary                         ==> OrderSummary
+ // partner                                     ==> youtube
+
+//return this._rpc({
+//                model: this.model,
+//                method: 'activity_send_mail',
+//                args: [[this.res_id], templateID],
+//            })
+//            .then(this._reload.bind(this, {activity: true, thread: true, followers: true}));
+//    },
 
  odoo.define("w1OrderSummary", function (require) {
 
@@ -15,28 +24,33 @@
         constructor(self, partner) {
             super();
             this.partner = partner;
+            console.log('Hello Javascript1')
         }
      }
 
-     /**
-      * Register properties to our widget.
-      */
-     Object.assign(OrderSummary, {
-         template: "w1OrderSummary"
-     });
+     /* Register properties to our widget. */
+     Object.assign(OrderSummary, {template: "w1OrderSummary"});
 
-     /**
-      * Override the form renderer so that we can mount the component on render
-      * to any div with the class o_partner_order_summary.
-      */
      FormRenderer.include({
-         async _render() {
-             await this._super(...arguments);
+     async _renderView() {
+         await this._super(...arguments);
 
-             for(const element of this.el.querySelectorAll(".o_partner_order_summary")) {
-                 (new ComponentWrapper(this, OrderSummary))
-                     .mount(element)
-             }
+         for(const element of this.el.querySelectorAll(".o_partner_order_summary")) {
+             console.log('Hello Javascript2')
+             console.log(this)
+             this._rpc({
+                 model: "youtube.patient",
+                 method: "read",
+                 args: [[this.state.data.id]]
+             }).then(data => {
+                 (new ComponentWrapper(
+                     this,
+                     OrderSummary,
+                     useState(data[0])
+                 )).mount(element);
+             });
          }
-     });
+     }
+ });
+
  });

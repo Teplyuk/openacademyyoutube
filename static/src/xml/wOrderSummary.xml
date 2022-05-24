@@ -2,7 +2,10 @@
 <templates xml:space="preserve">
      <t t-name="w1OrderSummary" owl="1">
           <div class="center">
-             <img class="w1O" src="#" width="75px" height="75px"/>
+             <img src="/openacademy_youtube/static/description/icon.png"
+                  class="w1O" width="75px" height="75px"/>
+             <img src="/openacademy_youtube/static/description/icon.png"
+                  class="w1O" width="75px" height="75px"/>
 
              <!-- Customer name -->
              <p class="p-name"><strong>ЗДЕСЬ МОЖЕТ БЫТЬ ВАША РЕКЛАМА</strong></p>
@@ -15,13 +18,13 @@
 
              <!-- Grid of previous order stats -->
              <div class="row">
-                 <div class="col-6">
-                     <p><strong>35</strong></p>
-                     <p class="p-text">Orders</p>
+                 <div class="col-6 col-6b">
+                     <p> <strong t-esc="partner.age" t-options='{"widget": "monetary"}'/> </p>
+                     <p class="p-text">Age</p>
                  </div>
                  <div class="col-6">
-                     <p><strong>$97,183.50</strong></p>
-                     <p class="p-text">Total Sales</p>
+                     <p><strong> <strong t-esc="partner.appointment_count"/> </strong></p>
+                     <p class="p-text">Appointment count</p>
                  </div>
              </div>
          </div>

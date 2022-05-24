@@ -31,8 +31,11 @@ padding-top: 20px;
 }
 
 div.col-6{
-border-right: 1px solid #ccc;
 font-size: 20px;
+}
+
+div.col-6b{
+border-right: 1px solid #ccc;
 }
 
 p.p-text{
