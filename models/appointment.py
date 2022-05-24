@@ -23,6 +23,7 @@ class YoutubeAppointment(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Youtube Appointment"
     _rec_name = 'patient_id'
+    _order = 'patient_id asc'                  # ('patient_id desc')
 
     patient_id = fields.Many2one(string='Patient', comodel_name='youtube.patient', ondelete='restrict')
     gender = fields.Selection(related='patient_id.gender', help='Sex')              #readonly=False

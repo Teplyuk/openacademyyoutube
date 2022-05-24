@@ -51,6 +51,11 @@
              });
          }
      }
- });
+     });
+
+//    model: "res.partner",
+//    method: "read",
+//    args: [[this.state.data.partner_id.res_id]]
+
 
  });

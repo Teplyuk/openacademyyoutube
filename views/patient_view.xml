@@ -9,8 +9,9 @@
                 <field name="id"/>
                 <field name="name" string="Youtube Name"/>
                 <field name="ref"/>
-                <field name="age"/>
+                <field name="age" avg="Average"/>
                 <field name="gender"/>
+                <field name="appointment_count" sum="Total Appointment"/>
                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
             </tree>
         </field>
@@ -22,6 +23,15 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>                                                 <!--  class="o_kanban_image_fill_left" // class="oe_avatar"-->
+                    <div class="alert alert-warning text-center o_form_header" role="alert"
+                            attrs="{'invisible': [('is_birthday', '=', False)]}">
+                        <a class="close" data-dismiss="alert" href="#">x</a>
+                        <div>
+                            <strong>Today is Birthday!</strong>
+                        </div>
+                        <div>Wish <field name="name" required="0" readonly="1"/>
+                        </div>
+                    </div>
                     <field name="image" widget="image" class="oe_avatar"
                            options="{'size': [100, 100]}"/>
                     <div class="oe_title">
@@ -35,6 +45,7 @@
                             <field name="date_of_birth"/>
                             <field name="age"/>
                             <field name="appointment_id"/>
+                            <field name="is_birthday" invisible="True"/>
                         </group>
                         <group>
                             <field name="gender" invisible="context.get('hide_gender')" widget="radio"/>
@@ -50,6 +61,11 @@
                         <field name="marital_status" attrs="{'invisible': [('age', '&lt;=', 18)]}"/>
                         <field name="partner_name" attrs="{'read_only': [('marital_status', '=', 'married')],
                                                                 'required': [('marital_status', '=', 'married')]}"/>
+                    </group>
+                    <group>
+                        <field name="phone" widget="phone"/>
+                        <field name="website" widget="url"/>
+                        <field name="email" widget="email"/>
                     </group>
                 </sheet>
                 <!-- Chatter -->
