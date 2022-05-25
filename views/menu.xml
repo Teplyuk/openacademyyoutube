@@ -28,6 +28,6 @@
               name="Cancellation"
               parent="youtube_menu_appointment_menu"
               action="action_cancel_appointment"
-              sequence="20"/>
+              sequence="25"/>
 
 </odoo>
