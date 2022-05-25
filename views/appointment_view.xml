@@ -34,6 +34,19 @@
         </field>
     </record>
 
+    <record id="view_youtube_appointment_calendar" model="ir.ui.view">
+        <field name="name">youtube.appointment.calendar</field>
+        <field name="model">youtube.appointment</field>
+        <field name="arch" type="xml">
+            <calendar string="Calendar" date_start="booking_date" mode="month" date_delay="duration"
+                        color="state" quick_add="False" hide_time="True"
+                        form_view_id="%(openacademy_youtube.view_youtube_appointment_form)d">
+                  <field name="patient_id" filters="1" avatar_field="image"/>
+                  <field name="state" invisible="1" filters="1"/>
+            </calendar>
+        </field>
+    </record>
+
     <record id="view_youtube_appointment_tree" model="ir.ui.view">
         <field name="name">youtube.appointment.tree</field>
         <field name="model">youtube.appointment</field>
@@ -73,6 +86,7 @@
                     <button name="edit" string="Edit" type="edit"/>
                     <button name="action_done" class="fa fa-check" type="object" title="Action Done"/>
                 </groupby>
+                <field name="progress" widget="progressbar"/>
             </tree>
         </field>
     </record>
@@ -126,9 +140,18 @@
                         <group>
                             <field name="appointment_time" default_focus='1'/>
                             <field name="hide_sales_prices" groups="base.group_no_one"/>
+                            <field name="booking_date" string="BOOKING DATE"/>
+                            <field name="duration"/>
                         </group>
                     </group>
                     <notebook>
+                        <page string='Progress' name='progress'>
+                            <group>
+<!--                                <field name="progress" widget="progressbar"/>-->
+                                <field name="progress" widget="percentpie"/>
+<!--                                <field name="progress" widget="gauge"/>-->
+                            </group>
+                        </page>
                         <page string='Prescription' name='prescription'>
                             <group>
                                 <field name="prescription" placeholder="Вы прекрасны!"
@@ -137,7 +160,6 @@
                         </page>
                         <page string='Pharmacy' name='pharmacy'>
                             <group>
-                                <field name="booking_date" string="Дата поставки"/>
                             </group>
                             <field name="pharmacy_lines_ids">
                                 <tree editable="bottom">     <!-- три варианта: через форму (без editable), без формы сверху (top), без формы снизу (bottom)-->
@@ -180,7 +202,7 @@
         <field name="name">Appointment</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">youtube.appointment</field>
-        <field name="view_mode">tree,form,activity</field>
+        <field name="view_mode">tree,form,activity,calendar</field>
         <field name="context">{}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

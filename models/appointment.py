@@ -1,4 +1,4 @@
-
+import random
 from odoo import api, fields, models, _, tools
 from odoo.exceptions import ValidationError
 
@@ -41,6 +41,8 @@ class YoutubeAppointment(models.Model):
     pharmacy_lines_ids = fields.One2many('youtube.appointment.lines', 'appointment_id', string='Pharmacy Lines')
     hide_sales_prices = fields.Boolean(string='Hide sales prices')
     operation_id = fields.Many2one(string='Operation', comodel_name='youtube.operation')
+    progress = fields.Integer(string='Progress', compute='_compute_progress')
+    duration = fields.Float(string='Duration')
 
     def unlink(self):
         if self.state != 'draft':
@@ -86,6 +88,21 @@ class YoutubeAppointment(models.Model):
     def action_tree_done(self):
         for rec in self:
             rec.state = 'done'
+
+    @api.depends('state')
+    def _compute_progress(self):
+        for rec in self:
+            if rec.state == 'gray':
+                progress = random.randrange(0,25)
+            elif rec.state == 'draft':
+                progress = 50
+            elif rec.state == 'in_consultation':
+                progress = 75
+            elif rec.state == 'done':
+                progress = 100
+            else:
+                progress = 0
+            rec.progress = progress
 
 
 class AppointmentLines(models.Model):
