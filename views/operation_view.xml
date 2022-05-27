@@ -6,6 +6,7 @@
         <field name="model">youtube.operation</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="sequence" widget="handle"/>
                 <field name="id"/>
                 <field name="doctor_id"/>
                 <field name="reference_record"/>

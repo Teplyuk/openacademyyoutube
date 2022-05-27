@@ -6,11 +6,13 @@ class YoutubeOperation(models.Model):
     _name = "youtube.operation"
     _description = "Youtube Operation"
     _log_access = False
+    _order = 'sequence, id'
 
     doctor_id = fields.Many2one(string='Doctor', comodel_name='res.users')
     operation_name = fields.Char(string='Name')
     reference_record = fields.Reference([('youtube.patient', 'Patient')], string='Record')
     resource_ref = fields.Reference(string='Record reference', selection='_selection_target_model')
+    sequence = fields.Integer(string='Sequence', default=10)
 
     @api.model
     def name_create(self, name):

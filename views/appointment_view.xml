@@ -142,6 +142,8 @@
                             <field name="hide_sales_prices" groups="base.group_no_one"/>
                             <field name="booking_date" string="BOOKING DATE"/>
                             <field name="duration"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="currency_id" groups="base.group_multi_currency"/>
                         </group>
                     </group>
                     <notebook>
@@ -164,9 +166,13 @@
                             <field name="pharmacy_lines_ids">
                                 <tree editable="bottom">     <!-- три варианта: через форму (без editable), без формы сверху (top), без формы снизу (bottom)-->
                                     <field name="product_id"/>
-                                    <field name="price_unit"
+                                    <field name="price_unit" widget="monetary"
+                                            options="{'currency_field': 'currency_id'}"
                                             attrs="{'column_invisible': [('parent.hide_sales_prices', '=', True)]}"/>
                                     <field name="qty"/>
+<!--                                    <field name="currency_id" invisible="1"/>-->
+                                    <field name="price_subtotal"/>
+                                    <field name="currency_id" invisible="1"/>
                                 </tree>
                                 <form>
                                     <group>
