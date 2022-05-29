@@ -10,8 +10,8 @@ class YoutubePatient(models.Model):
     _description = "Youtube Patient"
     _rec_name = 'name'
 
-    name = fields.Char(string='Name', tracking=True)
-    date_of_birth = fields.Date(string='Date of Birth')
+    name = fields.Char(string='Name', tracking=2)
+    date_of_birth = fields.Date(string='Date of Birth', tracking=1)
     age = fields.Integer(string='Age', compute='_compute_age', inverse='_inverse_compute_age', search='_search_age', tracking=True)
     ref = fields.Char(string='Reference', tracking=True)
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string='Gender', tracking=True)

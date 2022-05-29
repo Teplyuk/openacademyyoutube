@@ -45,6 +45,7 @@ class YoutubeAppointment(models.Model):
     duration = fields.Float(string='Duration')
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
     currency_id = fields.Many2one('res.currency', related='company_id.currency_id')
+    amount_total = fields.Monetary(string='Total', compute='_compute_amount_total', currency_field='currency_id')
 
     def unlink(self):
         if self.state != 'draft':
@@ -61,16 +62,11 @@ class YoutubeAppointment(models.Model):
         self.ref = self.patient_id.ref
 
     def object_button(self):
-        message = 'Hello World!'
-        print(message)
-        return {
-            'effect': {
-                'fadeout': 'slow',
-                'message': message,
-                'img_url': '/web/static/img/smiling_face.svg',
-                'type': 'rainbow_man',
-            }
-        }
+        return{
+            'type': 'ir.actions.act_url',
+            'target': 'new',
+            'url': 'http://weba.com.ua/'
+        }                                 #'url': 'shop'   or    #'url': 'http://localhost:8569/shop'
 
     def cancel_status_button(self):
         action = self.env.ref('openacademy_youtube.action_cancel_appointment').read()[0]
@@ -90,6 +86,14 @@ class YoutubeAppointment(models.Model):
     def action_tree_done(self):
         for rec in self:
             rec.state = 'done'
+        return {
+            'effect': {
+                'fadeout': 'slow',
+                'message': rec.state,
+                'img_url': '/web/static/img/smiling_face.svg',
+                'type': 'rainbow_man',
+            }
+        }
 
     @api.depends('state')
     def _compute_progress(self):
@@ -105,6 +109,14 @@ class YoutubeAppointment(models.Model):
             else:
                 progress = 0
             rec.progress = progress
+
+    @api.depends('pharmacy_lines_ids')
+    def _compute_amount_total(self):
+        for rec in self:
+            amount_total = 0
+            for line in rec.pharmacy_lines_ids:
+                amount_total += line.price_subtotal
+            rec.amount_total = amount_total
 
 
 class AppointmentLines(models.Model):
