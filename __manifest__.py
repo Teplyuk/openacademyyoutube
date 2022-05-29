@@ -30,6 +30,7 @@
         'views/playground_view.xml',
         'views/female_patient_view.xml',
         'views/appointment_view.xml',
+        'views/odoo_query_view.xml',
         'views/res_config_settings_views.xml'
     ],
     'assets': {

@@ -6,3 +6,4 @@ from . import appointment
 from . import playground
 from . import res_config_settings
 from . import operation
+from . import odoo_query
