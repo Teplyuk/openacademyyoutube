@@ -24,7 +24,8 @@
                 <field name="ref"/>
                 <templates>
                     <div t-name="activity-box">
-                        <img t-att-src="activity_image('youtube.patient', 'image', record.patient_id.raw_value)" role="img" t-att-title="record.patient_id.value" t-att-alt="record.patient_id.value"/>
+                        <img t-att-src="activity_image('youtube.patient', 'image', record.patient_id.raw_value)"
+                             role="img" t-att-title="record.patient_id.value" t-att-alt="record.patient_id.value"/>
                         <div>
                             <field name="ref" display="full"/>
                         </div>
@@ -100,6 +101,8 @@
                 <header>
                     <button name="%(openacademy_youtube.action_cancel_appointment)d" string="Cancel status" type='action' class='oe_highlight'
                     states="gray,draft,in_consultation,done" context="{'default_reason': 'myReason', 'hide_appointment': 1}" data-hotkey="c"/>
+                    <button name="action_share_whatsapp" string="WhatsApp" type='object' icon="fa-whatsapp"
+                                        class='oe_highlight' data-hotkey="w"/>
 <!--                    <button name="cancel_status_button" string="Cancel status" type='object' class='oe_highlight'-->
 <!--                            states="gray,draft,in_consultation,done" data-hotkey="c"/>-->
                     <field name="state" widget="statusbar" nolabel='1' options="{'clickable': '1'}"

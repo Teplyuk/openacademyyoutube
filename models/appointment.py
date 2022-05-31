@@ -95,6 +95,17 @@ class YoutubeAppointment(models.Model):
             }
         }
 
+    def action_share_whatsapp(self):
+        if not self.patient_id.phone:
+            raise ValidationError(_("Missing phone number in patient record"))
+        message = 'Hi %s, your *appointment* number is "%s"' % (self.patient_id.name, self.id)          # в whatsapp слово выделенное *ыыыы* будет жирным шрифтом (faq.whatsapp.com/general/chats/how-to-format-your-messages/?lang=en)
+        whatsapp_api_url = 'https://api.whatsapp.com/send?phone=%s&text=%s' % (self.patient_id.phone, message)
+        return {
+            'type': 'ir.actions.act_url',
+            'target': 'new',
+            'url': whatsapp_api_url
+        }
+
     @api.depends('state')
     def _compute_progress(self):
         for rec in self:
