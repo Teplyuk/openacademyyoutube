@@ -20,16 +20,20 @@ class YoutubePlayGround(models.Model):
     #  - self.env['youtube.patient'].browse(2).name: вот это - полезная информация! \n\n\n\n"""
 
     model_id = fields.Many2one('ir.model', string='Model')
-    code = fields.Text(string='Code', default=DEFAULT_ENV_VARIABLES)
+    code = fields.Text(string='Code')
     result = fields.Text(string='Result')
 
     def action_execute(self):
+        xxx = self.env['youtube.patient'].browse(32)
         try:
             if self.model_id:
                 model = self.env[self.model_id.model]
             else:
                 model = self
-            self.result = safe_eval(self.code.strip(), {'self': model})
+            if self.code:
+                self.result = safe_eval(self.code.strip(), {'self': model}, mode="eval")
+            else:
+                self.result = "Enter some codes to evaluate"
         except Exception as e:
             self.result = str(e)
 

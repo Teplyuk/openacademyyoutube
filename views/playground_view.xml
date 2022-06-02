@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <!--
+    МОЖНО "ПЛЕЙГРОУНД" ЗАПУСТИТЬ ИЗ КОМАНДНОЙ СТРОКИ ТЕРМИНАЛА ЛИНУКС
+
+    ~/.pyenv/versions/odoo15/bin/python /opt/odoo15/odoo/odoo-bin shell -d o15-learn -c /opt/odoo15/pjts/learn/o15.config
+	            python interpreter			runtime file	     command  database		       file config
+
+	в ней будут работать все команды, которые мы внизу использовали
+    а еще можно работать с переменными:
+    >>> xxx = self.env['youtube.patient'].browse(2).name
+    >>> print(xxx)
+
+    для обновления данных, нужно после команды делать коммит:
+    >>> self.env['youtube.patient'].browse(2).write({'phone': '103'})
+    >>> self.env.cr.commit()
+
+    выйти:
+    exit()
+
+    -->
+
     <record id="view_youtube_playground_form" model="ir.ui.view">
         <field name="name">youtube.playground.form</field>
         <field name="model">youtube.playground</field>
@@ -17,8 +37,43 @@
                 <group>
                     <field name="result"/>
                 </group>
-                <footer>
-                </footer>
+                <group>
+                    <div style="margin-top: 4px;">
+                        <h3>Help</h3>
+                        <p>Various available functions and variables available in odoo environment:</p>
+                        <ul>
+                            <li><code>self</code>: Current Object on which the action is triggered</li>
+                            <li><code>env</code>: Odoo Environment on which the action is triggered</li>
+                            <li><code>self.env.user</code>: Return the current user (as an instance)</li>
+                            <li><code>self.env.is_system</code>: Return whether the current user has group "Settings", or is in superuser mode</li>
+                            <li><code>self.env.is_admin</code>: Return whether the current user has group "Access Rights", or is in superuser mode</li>
+                            <li><code>self.env.is_superuser</code>: Return whether the environment is in superuser mode</li>
+                            <li><code>self.env.company</code>:Return the current company (as an instance)</li>
+                            <li><code>self.env.companies</code>: Return a recordset of the enabled companies by the user</li>
+                            <li><code>self.env.lang</code>: Return the current language code </li>
+                            <li><code>self.env.cr</code>: Database Cursor</li>
+                            <li><code>self.env.context</code>: Context</li>
+                            <li><code> #  - self.env.ref('base.res_partner_12').name </code> base.res_partner_12 - эту строку можем получить зайдя в объект - "Жучок" - View Metadata</li>
+                            <li><code> #  - self.env['youtube.patient'].browse(2).name </code> вывести имя объекта </li>
+                            <li><code> #  - self.env['youtube.patient'].browse([2,8]).mapped('name') </code> вывести имена объектов из массива </li>
+                            <li><code> #  - self.env['youtube.patient'].browse([2,8]).exists() </code> проверяет есть ли такой объект </li>
+                            <li><code> #  - self.env['youtube.patient'].browse(2).write({'phone': '102'}) </code> обновление объекта </li>
+                            <li><code> #  - self.env['youtube.patient'].browse(2).unlink() </code> удаление объекта </li>
+                            <li><code> #  - self.env['youtube.patient'].create({'name': 'NewPatientORM', 'phone': '+380639596952'}) </code> создание объекта </li>
+                            <li><code> #  - self.env['youtube.patient'].search([]) </code> запрос без отбора </li>
+                            <li><code> #  - self.env['youtube.patient'].search([], order='id desc') </code> запрос без отбора c упорядочиванием</li>
+                            <li><code> #  - self.env['youtube.patient'].search([], limit = 5) </code> запрос без отбора c ограниченным выводом</li>
+                            <li><code> #  - self.env['youtube.patient'].search([('gender', '=', 'female')]) </code> запрос с отбором </li>
+                            <li><code> #  - self.env['youtube.patient'].search(['|', ('gender', '=', 'female'), ('gender', '=', False)]) </code> запрос с несколькими отборами через ИЛИ </li>
+                            <li><code> #  - self.env['youtube.patient'].search_count([]) </code> количество элементов в запросе </li>
+                            <li><code> #  - self.env['youtube.patient'].search_count([('gender', '=', 'female')]) </code> количество элементов в запросе с отбором </li>
+                            <li><code> #  - self.env['youtube.patient'].browse(2).get_metadata() </code> metadata </li>
+                            <li><code> #  - self.env['youtube.patient'].browse([2,8]).get_metadata()[0].get('create_uid') </code> получить поле из metadata </li>
+                            <li><code> #  - self.env['youtube.patient'].fields_get(['name', 'gender']) </code> получить данные о полях объекта с отбором </li>
+                            <li><code> #  - self.env['youtube.patient'].fields_get(['name', 'gender'], ['selection', 'string']) </code> получить данные о полях объекта с отбором по полям и с отбором по реквизитам</li>
+                        </ul>
+                    </div>
+                </group>
             </form>
         </field>
     </record>

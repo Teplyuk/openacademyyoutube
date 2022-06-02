@@ -6,7 +6,7 @@ class PatientTag(models.Model):
     _name = "youtube.patient.tag"
     _description = "Youtube Patient Tag"
 
-    name = fields.Char(string='Name', required=True)
+    name = fields.Char(string='Name', required=True, trim=False)     #trim - отключает функцию 1С СокрЛП() (удаление пробелов лишних)
     active = fields.Boolean(string='Active', default=True, copy=False)
     color = fields.Integer(string='Color')
     color_hex = fields.Char(string='Color HEX')
