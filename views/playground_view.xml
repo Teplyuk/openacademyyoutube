@@ -66,6 +66,7 @@
                             <li><code> #  - self.env['youtube.patient'].search([('gender', '=', 'female')]) </code> запрос с отбором </li>
                             <li><code> #  - self.env['youtube.patient'].search(['|', ('gender', '=', 'female'), ('gender', '=', False)]) </code> запрос с несколькими отборами через ИЛИ </li>
                             <li><code> #  - self.env['youtube.patient'].search_count([]) </code> количество элементов в запросе </li>
+                            <li><code> #  - self.env['youtube.patient'].with_context(active_test=False).search_count([])  </code> количество элементов в запросе (с помеченными на удаление) </li>
                             <li><code> #  - self.env['youtube.patient'].search_count([('gender', '=', 'female')]) </code> количество элементов в запросе с отбором </li>
                             <li><code> #  - self.env['youtube.patient'].browse(2).get_metadata() </code> metadata </li>
                             <li><code> #  - self.env['youtube.patient'].browse([2,8]).get_metadata()[0].get('create_uid') </code> получить поле из metadata </li>
